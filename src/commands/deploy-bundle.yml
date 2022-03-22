@@ -52,7 +52,7 @@ steps:
                   --output json <<# parameters.get-deployment-group-arguments >> << parameters.get-deployment-group-arguments >><</parameters.get-deployment-group-arguments >>)
         STATUS=`echo $DEPLOY | jq -c '.deploymentInfo.status`
         while [[ $STATUS == "Created" || $STATUS == "InProgress" || $STATUS == "Pending" || $STATUS == "Queued" || $STATUS == "Ready" ]]; do
-          echo "status: $(echo $TE | jq -c '.deploymentInfo.deploymentOverview')"
+          echo "deploy ID: $ID status: $(echo $TE | jq -c '.deploymentInfo.deploymentOverview')"
           DEPLOY=$(aws deploy get-deployment \
                     --deployment-id $ID \
                     --output json <<# parameters.get-deployment-group-arguments >> << parameters.get-deployment-group-arguments >><</parameters.get-deployment-group-arguments >>)
